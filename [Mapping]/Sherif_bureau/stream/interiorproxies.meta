@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SInteriorOrderData>
+  <startFrom value="2000" />
+  <proxies>
+	<Item>paleto_mlo</Item>
+  <Item>hei_dt1_occl_05</Item>
+  <Item>int_mrpd_milo_</Item>
+  <Item>hei_dt1_19_interior_0_heist_police_dlc_milo_</Item>
+  <Item>hei_id2_occl_00</Item>
+  <Item>gabz_pillbox_dlc_milo_</Item>
+  <Item>gabz_pillbox_milo_</Item>
+  <Item>hei_dt1_occl_07</Item>
+  <Item>bs_mlo</Item>
+  <Item>vb_occl_01</Item>
+  <Item>ch1_occl_03</Item>
+    <Item>int_garage_milo_</Item>
+  <Item>garage_mlo_det</Item>
+  <Item>garage_mlo_coll</Item>
+  <Item>garage_mlo</Item>
+  <Item>int_fvineyard_milo_</Item>
+    <Item>fvineyard_r05_mlo</Item>
+  <Item>fvineyard_r04_mlo</Item>
+  <Item>fvineyard_r03_mlo</Item>
+  <Item>fvineyard_r02_mlo</Item>
+    <Item>fvineyard_r01_mlo</Item>
+  <Item>fvineyard_mlo_coll</Item>
+
+ <Item>int_prison_second_milo_</Item>
+  <Item>int_prison_recep_milo_</Item>
+  <Item>int_prison_main_milo_</Item>
+  <Item>int_prison_first_milo_</Item>
+    <Item>hei_ch3_occl_03</Item>
+  <Item>cs6_occl_02</Item>
+
+
+<Item>int_thug_milo_</Item>
+  <Item>crash_warehouse_milo</Item>
+  <Item>hei_dt1_occl_04</Item>
+  <Item>qnx_jud_milo_</Item>
+  <Item>hw1_occl_01</Item>
+  <Item>int_taxi_milo_</Item>
+  <Item>patoche_shop_milo_</Item>
+  <Item>agent_milo</Item>
+  <Item>cs1_occl_10</Item>
+
+  <Item>cs4_occl_00</Item>
+  <Item>RonOffice_mlo</Item>
+  <Item>hei_id2_occl_02</Item>
+  <Item>hei_id2_occl_03</Item>
+  <Item>mr_prk1_milo_</Item>
+  <Item>hills_milo_</Item>
+  <Item>hei_dt1_occl_06</Item>
+  
+  <Item>lr_sc1_occl_02</Item>
+
+  </proxies>
+</SInteriorOrderData>

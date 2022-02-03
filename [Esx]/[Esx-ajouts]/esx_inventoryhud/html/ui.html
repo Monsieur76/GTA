@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ESX INVENTORY HUD BY TRSAK</title>
+    <link href="https://fonts.googleapis.com/css?family=Signika" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+</head>
+
+<body>
+    <script src="js/config.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="js/inventory.js"></script>
+    <script>
+        $(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                clickOutside: true
+            });
+        });
+    </script>
+
+    <div class="ui">
+        <div class="inventory">
+            <div id="etiquette">
+                <label for="etiquette">Étiquette :</label>
+                <input type="text" name="etiquette">
+            </div>
+            <div id="etiquetteTrunk">
+                <label for="etiquetteTrunk">Étiquette :</label>
+                <input type="text" name="etiquetteTrunk">
+            </div>
+            <div id="etiquetteAppart">
+                <label for="etiquetteAppart">Étiquette :</label>
+                <input type="text" name="etiquetteAppart">
+            </div>
+            <div id="etiquetteConfiscation">
+                <label for="etiquetteConfiscation">Étiquette :</label>
+                <input type="text" name="etiquetteConfiscation">
+            </div>
+            <div id="playerInventoryCapacity">
+                Capacité : 45kg / 250kg
+            </div>
+            <div id="playerInventory">
+            </div>
+            <div id="controls">
+                <div class="info-div"></div>
+                <div class="controls-div">
+                    Quantité
+                    <input type="number" id="count" value="1">
+                    <!--Capacité inventaire :-->
+                    <div class="capacity-div"></div>
+                </div>
+            </div>
+            <div id="otherInventoryCapacity">
+                Capacité : 45kg / 250kg
+            </div>
+            <div id="otherInventory">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

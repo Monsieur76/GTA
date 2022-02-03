@@ -1,0 +1,122 @@
+local Keys = {
+	['ESC'] = 322, ['F1'] = 288, ['F2'] = 289, ['F3'] = 170, ['F5'] = 166, ['F6'] = 167, ['F7'] = 168, ['F8'] = 169, ['F9'] = 56, ['F10'] = 57, 
+	['~'] = 243, ['1'] = 157, ['2'] = 158, ['3'] = 160, ['4'] = 164, ['5'] = 165, ['6'] = 159, ['7'] = 161, ['8'] = 162, ['9'] = 163, ['-'] = 84, ['='] = 83, ['BACKSPACE'] = 177, 
+	['TAB'] = 37, ['Q'] = 44, ['W'] = 32, ['E'] = 38, ['R'] = 45, ['T'] = 245, ['Y'] = 246, ['U'] = 303, ['P'] = 199, ['['] = 39, [']'] = 40, ['ENTER'] = 18,
+	['CAPS'] = 137, ['A'] = 34, ['S'] = 8, ['D'] = 9, ['F'] = 23, ['G'] = 47, ['H'] = 74, ['K'] = 311, ['L'] = 182,
+	['LEFTSHIFT'] = 21, ['Z'] = 20, ['X'] = 73, ['C'] = 26, ['V'] = 0, ['B'] = 29, ['N'] = 249, ['M'] = 244, [','] = 82, ['.'] = 81,
+	['LEFTCTRL'] = 36, ['LEFTALT'] = 19, ['SPACE'] = 22, ['RIGHTCTRL'] = 70, 
+	['HOME'] = 213, ['PAGEUP'] = 10, ['PAGEDOWN'] = 11, ['DELETE'] = 178,
+	['LEFT'] = 174, ['RIGHT'] = 175, ['TOP'] = 27, ['DOWN'] = 173,
+	['NENTER'] = 201, ['N4'] = 108, ['N5'] = 60, ['N6'] = 107, ['N+'] = 96, ['N-'] = 97, ['N7'] = 117, ['N8'] = 61, ['N9'] = 118
+}
+
+Config = {}
+
+-- CONTROLS --
+Config.Controls = {
+	ouvrirMenu = {keyboard = Keys['E']},
+}
+Config.Properties             = {}
+
+Config.GarageLevels = {3,5,7,9}
+garage              = {}
+garage.DrawDistance = 100
+garage.Size         = {x = 3.0, y = 3.0, z = 1.5}
+garage.Color        = {r = 25, g = 95, b = 255} --vert pour les voiture a sortir
+garage.Color2        = {r = 25, g = 95, b = 255} --rouge pour les voiture a ranger
+garage.Type         = 1
+
+garage.zone = {
+
+	ANowhereRd={sortie={x=2166.07, y=3365.59,z=45.58,h=301.0},name=20},
+	BNowhereRd={sortie={x=2157.58, y=3325.58,z=45.89,h=205.0},name=21},
+	SmokeTreeRoadBlaineCounty={sortie={x=2208, y=3305.57,z=46.23,h=284.0},name=22},
+	NowhereRd={sortie={x=2171.82, y=3487.22,z=45.26,h=122.0},name=23},
+	ASmokeTreeRoad={sortie={x=2402.76, y=3308.54,z=47.59,h=328.0},name=24},
+	BSmokeTreeRoad={sortie={x=2402.08, y=3337.97,z=47.54,h=318.0},name=25},
+	CSmokeTreeRoad={sortie={x=2493.42, y=3434.96,z=50.16,h=149.0},name=26},
+	EastJoshuaRoad={sortie={x=2492.79, y=3728.12,z=43.43,h=40.0},name=27},
+	APanoramaDrive={sortie={x=1958.3, y=3036.62,z=47.12,h=322.0},name=28},
+	ASenioraFreeway={sortie={x=2369.34, y=2611.1,z=46.65,h=324.0},name=29},
+	BSenioraFreeway={sortie={x=2326.8, y=2616.77,z=46.54,h=334.0},name=30},
+	CSenioraFreeway={sortie={x=2322.64, y=2599.31,z=46.63,h=356.0},name=31},
+	DSenioraFreeway={sortie={x=2331.92, y=2579.52,z=46.67,h=57.0},name=32},
+	ESenioraFreeway={sortie={x=2372.35, y=2568.75,z=46.67,h=221.0},name=33},
+	FSenioraFreeway={sortie={x=2371.63, y=2543.03,z=46.67,h=182.0},name=34},
+	GSenioraFreeway={sortie={x=2360.52, y=2512.3,z=46.67,h=137.0},name=35},
+	HSenioraFreeway={sortie={x=2327.2, y=2511.81,z=46.67,h=256.0},name=36},
+	ISenioraFreeway={sortie={x=2315.12, y=2521.19,z=46.67,h=84.0},name=37},
+	JSenioraFreeway={sortie={x=2306.59, y=2547.01,z=46.67,h=225.0},name=38},
+	ACalafiaRoad={sortie={x=88.95, y=3649.26,z=39.6,h=176.0},name=39},
+	BCalafiaRoad={sortie={x=88.7, y=3673.47,z=39.6,h=94.0},name=40},
+	CCalafiaRoad={sortie={x=80.61, y=3762.72,z=39.72,h=178.0},name=41},
+	DCalafiaRoad={sortie={x=10.0, y=3681.19,z=39.69,h=283.0},name=42},
+	ECalafiaRoad={sortie={x=60.51, y=3702.05,z=39.76,h=61.0},name=43},
+	FCalafiaRoad={sortie={x=84.22, y=3730.75,z=39.6,h=237.0},name=44},
+	ICalafiaRoad={sortie={x=68.29, y=3731.97,z=39.58,h=33.0},name=45},
+	AJoshuaRoad={sortie={x=369.0, y=2962.75,z=40.91,h=95.0},name=46},
+	BJoshuaRoad={sortie={x=424.05, y=2975.3,z=41.07,h=42.0},name=47},
+	CJoshuaRoad={sortie={x=420.16, y=2986.95,z=40.79,h=21.0},name=48},
+	DJoshuaRoad={sortie={x=509.94, y=3080.44,z=40.27,h=236.0},name=49},
+	EJoshuaRoad={sortie={x=502.34, y=3115.63,z=40.79,h=317.0},name=50},
+	ARoute={sortie={x=865.71, y=2868.29,z=57.33,h=189.0},name=51},
+	BRoute={sortie={x=843.75, y=2847.77,z=58.48,h=155.0},name=52},
+	CRoute={sortie={x=882.7, y=2857.21,z=56.66,h=143.0},name=53},
+	ABRoute={sortie={x=1576.47, y=2904.4,z=56.85,h=240.0},name=54},
+	BPanoramaDrive={sortie={x=1768.84, y=3296.36,z=41.19,h=135.0},name=55},
+	GreatOceanHighway={sortie={x=1530.0, y=6319.77,z=24.13,h=339.0},name=56},
+	Route={sortie={x=570.87, y=2589.27,z=42.81,h=97.0},name=57},
+	ASenioraRoad={sortie={x=409.13, y=2573.85,z=43.52,h=95.0},name=58},
+	BSenioraRoad={sortie={x=379.32, y=2591.16,z=43.52,h=287.0},name=59},
+	CSenioraRoad={sortie={x=363.5, y=2584.46,z=43.52,h=16.0},name=60},
+	DSenioraRoad={sortie={x=342.07, y=2578.96,z=43.52,h=36.0},name=61},
+	JCalafiaRoad={sortie={x=113.51, y=3722.34,z=39.71,h=112.0},name=62},
+	KCalafiaRoad={sortie={x=57.46, y=3741.04,z=39.73,h=280.0},name=63},
+	LCalafiaRoad={sortie={x=25.94, y=3732.17,z=39.69,h=223.0},name=64},
+	--ZancudoTrailBeach={sortie={x=, y=,z=,h=},name= 65},
+	DellPerroHeightsAptA={sortie={x=-1458.91, y=-498.79,z=32.66,h=26.85},name=66},
+	DellPerroHeightsAptB={sortie={x=-1458.91, y=-498.79,z=32.66,h=26.85},name=67},
+	EclipseTowersAptA={sortie={x=-796.03, y=322.26,z=85.7,h=173.39},name=68},
+	EclipseTowersAptB={sortie={x=-793.03, y=322.26,z=85.7,h=173.39},name=69},
+	EclipseTowersAptC={sortie={x=-793.03, y=322.26,z=85.7,h=173.39},name=70},
+	HillcrestAvenueA={sortie={x=-684.14, y=603.23,z=143.54,h=42.99},name=71},
+	HillcrestAvenueB={sortie={x=-753.23, y=627.08,z=142.56,h=294.22},name=72},
+	HillcrestAvenueC={sortie={x=-862.6, y=698.29,z=149.03,h=355.51},name=73},
+	IntegrityWayAptA={sortie={x=-53.02, y=-576.13,z=37.5,h=339.23},name=74},
+	IntegrityWayAptB={sortie={x=-53.02, y=-576.13,z=37.5,h=339.23},name=75},
+	StrawberryAvenue={sortie={x=300.28, y=-961.22,z=29.42,h=267.0},name=76},
+	MadWayneThunder={sortie={x=-1298.53, y=469.77,z=97.85,h=262.0},name=77},
+	AtleeStreet={sortie={x=348.31, y=-995.45,z=29.32,h=2.75},name=78},
+	NorthConkerAvenueA={sortie={x=353.37, y=437.42,z=146.79,h=294.66},name=79},
+	NorthConkerAvenueB={sortie={x=367.44, y=434.53,z=144.53,h=144.66},name=80},
+	RichardMajesticAptA={sortie={x=-957.33, y=-408.4,z=37.83,h=24.80},name=81},
+	TinselTowersAptA={sortie={x=-597.08, y=21.66,z=43.19,h=266.86},name=82},
+	WhispymoundDrive={sortie={x=131.61, y=566.79,z=183.74,h=4.51},name=83},
+	WildOatsDrive={sortie={x=-188.82, y=500.75,z=134.62,h=8.36},name=84},
+	AMirrorPark={sortie={x=1309.32, y=-531.06,z=71.31,h=155.98},name=85},
+	XMirrorPark={sortie={x=1354.88, y=-550.38,z=73.78,h=154.55},name=86},
+	YMirrorPark={sortie={x=1381.21, y=-598.81,z=74.34,h=51.66},name=87},
+	ZMirrorPark={sortie={x=1359.86, y=-606.49,z=74.34,h=3.11},name=88},
+	BMirrorPark={sortie={x=1317.31, y=-579.67,z=73.1,h=333.77},name=89},
+	CMirrorPark={sortie={x=1294.3, y=-571.02,z=71.44,h=345.32},name=90},
+	DMirrorPark={sortie={x=1390.95, y=-576.34,z=74.34,h=106.64},name=91},
+	EMirrorPark={sortie={x=926.81, y=-567.0,z=57.97,h=204.59},name=92},
+	FMirrorDrive={sortie={x=957.02, y=-663.17,z=58.01,h=302.44},name=93},
+	BMirrorDrive={sortie={x=913.28, y=-487.01,z=59.04,h=206.42},name=94},
+	ANormandyDrive={sortie={x=-757.45, y=815.64,z=213.51,h=290.63},name=95},
+	BNormandyDrive={sortie={x=-555.4, y=664.97,z=145.1,h=339.33},name=96},
+	EclipseTowersAptE={sortie={x=-796.03, y=322.26,z=85.7,h=173.39},name=97},
+	EclipseTowersAptF={sortie={x=-796.03, y=322.26,z=85.7,h=173.39},name=98},
+	EclipseTowersAptG={sortie={x=-796.03, y=322.26,z=85.7,h=173.39},name=99},
+	TinselTowersAptC={sortie={x=-597.08, y=21.66,z=43.19,h=266.86},name=100},
+	IntegrityWayAptC={sortie={x=-53.02, y=-576.13,z=37.5,h=339.23},name=101},
+	AltaStAptA={sortie={x=-240.67, y=-988.28,z=29.29,h=339.17},name=102},
+	AltaStAptB={sortie={x=-240.67, y=-988.28,z=29.29,h=339.17},name=103},
+	WeazelPlazaAptA={sortie={x=-935.65, y=-453.66,z=37.32,h=204.27},name=104},
+	WeazelPlazaAptB={sortie={x=-935.65, y=-453.66,z=37.32,h=204.27},name=105},
+	RichardMajesticAptC={sortie={x=-957.33, y=-408.4,z=37.83,h=24.80},name=106},
+	RichardMajesticAptB={sortie={x=-957.33, y=-408.4,z=37.83,h=24.80},name=107},
+	BridgeStreet={sortie={x=1100.03, y=-418.57,z=67.15,h=79.80},name=108},
+	EclipseTowersAptH={sortie={x=-796.03, y=322.26,z=85.7,h=173.39},name=109},
+	EclipseTowersAptI={sortie={x=-796.03, y=322.26,z=85.7,h=173.39},name=110}
+}

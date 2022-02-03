@@ -1,0 +1,21 @@
+Locales["fr"] = {
+	["cash"] = "Argent",
+	["black_money"] = "Argent sale",
+	["player_nearby"] = "Le joueur n'est plus à côté !",
+	["players_nearby"] = "Il n'y a pas de joueurs aux alentours !",
+	["openinv_help"] = "Ouvrir l'inventaire d'un autre joueur.",
+	["openinv_id"] = "Player ID",
+	["no_permissions"] = "Vous n'avez pas la permission de faire ça !",
+	["no_player"] = "Cannot find player!",
+	["player_inventory"] = "Votre inventaire",
+	["nacho_veh"] = "Ce n'est pas votre véhicule.",
+	["player_inv_no_space"] = "Pas de place dans l'inventaire.",
+	["insufficient_space"] = "Pas de place dans l'inventaire.",
+	["invalid_quantity"] = "Quantité invalide.",
+	["item_added"] = "Ajouté:",
+	["item_removed"] = "Retiré:",
+	["money_added"] = "Ajouté:",
+	["money_removed"] = "Retiré:",
+	["weapon_added"] = "Ajouté:",
+	["weapon_removed"] = "Retiré:"
+}
