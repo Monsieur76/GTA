@@ -240,7 +240,7 @@ Citizen.CreateThread(function()
                 oldBodyDamage = currentDamage
                 currentDamage = GetVehicleBodyHealth(vehicle)
                 currentSpeed = GetEntitySpeed(vehicle) * 2.23
-                local damage = GetVehHealthPercent(vehicle)
+                local damage = GetVehHealthPercent()
 
                 if currentDamage ~= oldBodyDamage then
                     if  currentDamage < oldBodyDamage then
@@ -268,7 +268,7 @@ Citizen.CreateThread(function()
                             Undriveable(vehicle,1000)
 
 
-                        elseif damage < 90 then
+                        elseif damage < 95 then
                               SetVehicleUndriveable(vehicle, true)
                             end
                         end

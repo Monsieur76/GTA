@@ -18,6 +18,7 @@ RegisterNUICallback("NUIFocusOff", function(data, cb)
     local isConfiscation = from == "confiscation"
     local isCoffreAppartement = from == "coffre_appartement"
     local isCoffreFortAppartement = from == "coffreFort_appartement"
+    print('ici')
     SendNUIMessage({
         action = "hide"
     })
@@ -25,9 +26,10 @@ RegisterNUICallback("NUIFocusOff", function(data, cb)
     elseif isArmory then
     elseif isFrigo then
     elseif isSocietyVault then
-        TriggerServerEvent("Vault:noPeaple")
     elseif isTrunk then
-        TriggerServerEvent("trunk:noPeaple")
+        local vehicle, dist = ESX.Game.GetClosestVehicle(coords)
+        SetVehicleDoorShut(vehicle, 5, false, false)
+        SetNuiFocus(false, false)    
     elseif isCoffreAppartement then
     elseif isCoffreFortAppartement then
     end

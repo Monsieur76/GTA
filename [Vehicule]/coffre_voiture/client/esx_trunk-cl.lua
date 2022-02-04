@@ -38,9 +38,10 @@ end)
 function openmenuvehicle()
     local playerPed = PlayerPedId()
     local coords = GetEntityCoords(playerPed)
-    local vehicle = ESX.Game.GetClosestVehicle(coords)
+    local vehicle, dist = ESX.Game.GetClosestVehicle(coords)
     local plate = GetVehicleNumberPlateText(vehicle)
     --if PlayerName == nil then
+    if dist < 3.0 then
         if not IsPedInAnyVehicle(playerPed) then
             if vehicle ~= nil then
                 myVeh = false
@@ -50,6 +51,7 @@ function openmenuvehicle()
                         local locked = GetVehicleDoorLockStatus(vehicle)
                         local class = GetVehicleClass(vehicle)
                         if locked == 1 then
+                            SetVehicleDoorOpen(vehicle, 5, false, false)
                             OpenCoffreInventoryMenu(plate, Config.VehicleWeight[class], vehicle)
                             --TriggerServerEvent("trunk:someoneIn")
                         else
@@ -63,6 +65,9 @@ function openmenuvehicle()
                 ESX.ShowNotification(_U("no_veh_nearby"))
             end
         end
+    else
+        ESX.ShowNotification("Véhicule hors de porté")
+    end
     ---else
     --    ESX.ShowNotification("~r~ Coffre de voiture utilisé par " .. PlayerName)
     --end
