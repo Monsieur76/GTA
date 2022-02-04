@@ -176,49 +176,26 @@ ConfAmmu = {
             Value = 'WEAPON_CARBINERIFLE',
             Price = 19500
         }, {
-            Label = 'Chargeur carabine d\'assaut',
+            Label = 'Chargeur 5.6',
             Value = 'chargeur_carabine',
             Price = 50
         }, {
-            Label = 'Chargeur fusil à pompe',
+            Label = 'Chargeur C.12',
             Value = 'chargeur_fap',
             Price = 50
         } -- {Label = 'Fusil à lunette', Value = 'WEAPON_SNIPERRIFLE', Price = 125000},
         },
+
         outilsBrinks = {{
             Label = 'Lampe Torche',
             Value = 'WEAPON_FLASHLIGHT',
             Price = 150
-        }, {
-            Label = 'Matraque',
-            Value = 'WEAPON_NIGHTSTICK',
-            Price = 300
-        }, {
-            Label = 'Radio',
-            Value = 'radio',
-            Price = 500
-        }, {
-            Label = 'Fusil à pompe',
-            Value = 'WEAPON_PUMPSHOTGUN',
-            Price = 11500
-        }, {
-            Label = 'Chargeur fusil à pompe',
-            Value = 'chargeur_fap',
-            Price = 50
         }},
 
         outilsLSMS = {{
             Label = 'Plot',
             Value = 'plot',
             Price = 100
-        }, {
-            Label = 'Tazer',
-            Value = 'WEAPON_STUNGUN',
-            Price = 150
-        }, {
-            Label = 'Radio',
-            Value = 'radio',
-            Price = 500
         }},
         Armes = {
             -- {Label = 'Pétoire', Value = 'WEAPON_SNSPISTOL', Price = 450},

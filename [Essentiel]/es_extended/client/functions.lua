@@ -376,25 +376,22 @@ ESX.Game.DeleteObject = function(object)
 	DeleteObject(object)
 end
 
-ESX.Game.SpawnVehicle = function(vehicle, coords, heading, cb, networked)
+ESX.Game.SpawnVehicle = function(vehicle, coords, heading, cb)
 	local model = (type(vehicle) == 'number' and vehicle or GetHashKey(vehicle))
 	local vector = type(coords) == "vector3" and coords or vec(coords.x, coords.y, coords.z)
-	networked = networked == nil and true or networked
 	Citizen.CreateThread(function()
 		ESX.Streaming.RequestModel(model)
 
-		local vehicle = CreateVehicle(model, vector.xyz, heading, networked, false)
+		local vehicle = CreateVehicle(model, vector.xyz, heading, true, false)
 
-		if networked then
-			local id = NetworkGetNetworkIdFromEntity(vehicle)
-			SetNetworkIdCanMigrate(id, true)
-			SetEntityAsMissionEntity(vehicle, true, false)
-		end
+		local id = NetworkGetNetworkIdFromEntity(vehicle)
+		SetNetworkIdCanMigrate(id, true)
+		SetEntityAsMissionEntity(vehicle, true, false)
 		SetVehicleHasBeenOwnedByPlayer(vehicle, true)
 		SetVehicleNeedsToBeHotwired(vehicle, false)
 		
-SetVehicleIsStolen(vehicle, false)
-SetVehicleIsWanted(vehicle, false)
+		SetVehicleIsStolen(vehicle, false)
+		SetVehicleIsWanted(vehicle, false)
 		SetModelAsNoLongerNeeded(model)
 		SetVehRadioStation(vehicle, 'OFF')
 

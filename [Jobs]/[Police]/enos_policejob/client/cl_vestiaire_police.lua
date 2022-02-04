@@ -32,6 +32,7 @@ Citizen.CreateThread(function()
             --Tenue Civil
             RageUI.ButtonWithStyle("Reprendre sa tenue civile", nil, {nil}, true, function(Hovered, Active, Selected)
                 if Selected then
+                    TriggerServerEvent("service:true",false)
                     local plyPed = PlayerPedId()
                     local model = GetEntityModel(PlayerPedId())
                     ClearPedBloodDamage(PlayerPedId())
@@ -105,6 +106,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 0 then
                 RageUI.ButtonWithStyle("Uniforme", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -210,6 +212,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 1 then
                 RageUI.ButtonWithStyle("Uniforme", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -315,6 +318,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 0 or ESX.PlayerData.job.grade == 1 then
                 RageUI.ButtonWithStyle("Tenue Ceremonie", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -421,6 +425,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 2 then
                 RageUI.ButtonWithStyle("Uniforme", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -523,6 +528,7 @@ Citizen.CreateThread(function()
                 end)
                 RageUI.ButtonWithStyle("Uniforme Hiver", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -625,6 +631,7 @@ Citizen.CreateThread(function()
                 end)
                 RageUI.ButtonWithStyle("Tenue Ceremonie", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -732,6 +739,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 3 then
                 RageUI.ButtonWithStyle("Uniforme", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -838,6 +846,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 4 then
                 RageUI.ButtonWithStyle("Uniforme", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -944,6 +953,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 3 or ESX.PlayerData.job.grade == 4 then
                 RageUI.ButtonWithStyle("Tenue Inspecteur", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -1052,6 +1062,7 @@ Citizen.CreateThread(function()
                 end)
                 RageUI.ButtonWithStyle("Tenue Ceremonie", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -1158,6 +1169,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade == 3 or ESX.PlayerData.job.grade == 2 or ESX.PlayerData.job.grade == 4 then
                 RageUI.ButtonWithStyle("Tenue SWAT", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())
@@ -1293,6 +1305,7 @@ Citizen.CreateThread(function()
             if ESX.PlayerData.job.grade ~= 0 then
                 RageUI.ButtonWithStyle("Tenue Pilote", nil, {nil}, true, function(Hovered, Active, Selected)
                     if Selected then
+                        TriggerServerEvent("service:true",true)
                         local model = GetEntityModel(PlayerPedId())
                         local plyPed = PlayerPedId()
                         ClearPedBloodDamage(PlayerPedId())

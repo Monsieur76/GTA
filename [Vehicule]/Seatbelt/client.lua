@@ -262,13 +262,13 @@ Citizen.CreateThread(function()
                             oldBodyDamage = currentDamage
 
 
-                        elseif (oldBodyDamage - currentDamage) >= 20 and (oldBodyDamage - currentDamage) <= 25
+                        elseif (oldBodyDamage - currentDamage) >= 10 and (oldBodyDamage - currentDamage) <= 25
                         then
                             oldBodyDamage = currentDamage
                             Undriveable(vehicle,1000)
 
 
-                        elseif damage < 87 then
+                        elseif damage < 90 then
                               SetVehicleUndriveable(vehicle, true)
                             end
                         end

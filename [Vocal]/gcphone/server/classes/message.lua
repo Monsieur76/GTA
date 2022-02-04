@@ -13,8 +13,5 @@ function CreateDataStore(transmitter, receiver, message, time, isRead, owner, is
     self.groupGUID = groupGUID
     self.fromNorth = fromNorth
 
-
-    
-
     return self
 end

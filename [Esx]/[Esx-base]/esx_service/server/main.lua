@@ -71,3 +71,10 @@ AddEventHandler('Monsieur_virer_employ', function(targetId,job)
 			TriggerClientEvent('esx:showNotification', __source, "La personne ne fait pas partie de votre entreprise")
 		end
 end)
+
+RegisterServerEvent('service:true')
+AddEventHandler('service:true', function(bool)
+	__source = source
+	local xPlayer = ESX.GetPlayerFromId(__source)
+	xPlayer.setService(bool)
+end)

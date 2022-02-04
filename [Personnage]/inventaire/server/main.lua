@@ -27,29 +27,47 @@ AddEventHandler('inventoryprendre', function(target)
     TriggerClientEvent("animationtarget", target)
 end)
 
-RegisterServerEvent('Notifymoney')
-AddEventHandler('Notifymoney', function(target_id, price)
-    local targetPlayer = ESX.GetPlayerFromId(target_id)
-    TriggerClientEvent("esx:showNotification", targetPlayer.source,
-        'Vous avez reçu ~g~' .. ESX.Math.GroupDigits(price) .. "$")
-end)
-
 ESX.RegisterServerCallback('payement', function(source, cb, quantity)
     local playerId = source
     local xPlayer = ESX.GetPlayerFromId(playerId)
-    local prix = "rien"
-    local black = xPlayer.getAccount("black_money")
-    local money = xPlayer.getAccount("money")
+    local black = xPlayer.getAccount("black_money").money
+    local money = xPlayer.getAccount("money").money
 
-    if quantity > 0 and black.money + money.money >= quantity then
-        if black.money >= quantity then
-            prix = "bon"
-            cb(prix, black.money, money.money)
-        else
-            prix = "double"
-            cb(prix, black.money, money.money)
-        end
+    if quantity > 0 and black + money >= quantity or money >= quantity then
+        cb(true)
     else
-        cb(prix)
+        cb(false)
+    end
+end)
+
+RegisterServerEvent('give:money')
+AddEventHandler('give:money', function(target_id, price)
+    local playerId = source
+    local xPlayer = ESX.GetPlayerFromId(playerId)
+    local xTarget = ESX.GetPlayerFromId(target_id)
+    local black = xPlayer.getAccount("black_money").money
+
+    if black >= price then
+        print('ici')
+        xPlayer.removeAccountMoney('black_money', price)
+        xTarget.addAccountMoney('black_money', price)
+        TriggerClientEvent("esx:showNotification",xPlayer.source,'Vous avez donné ~r~' .. ESX.Math.GroupDigits(price) .. "$")
+        TriggerClientEvent("esx:showNotification",xTarget.source,'Vous avez reçue ~g~' .. ESX.Math.GroupDigits(price) .. "$")
+    elseif black ~= 0 and black < price then
+        print('la')
+        totalrestepayer = price - black
+        xPlayer.removeAccountMoney('black_money', black)
+        xTarget.addAccountMoney('black_money', black)
+        TriggerClientEvent("esx:showNotification",xPlayer.source,'Vous avez donné ~r~' .. ESX.Math.GroupDigits(black) .. "$")
+        xPlayer.removeAccountMoney('money', totalrestepayer)
+        xTarget.addAccountMoney('money', totalrestepayer)
+        TriggerClientEvent("esx:showNotification",xPlayer.source,'Vous avez donné ~g~' .. ESX.Math.GroupDigits(totalrestepayer) .. "$")
+        TriggerClientEvent("esx:showNotification",xTarget.source,'Vous avez reçue ~g~' .. ESX.Math.GroupDigits(price) .. "$")
+    else
+        print('par cic')
+        xPlayer.removeAccountMoney('money', price)
+        xTarget.addAccountMoney('money', price)
+        TriggerClientEvent("esx:showNotification",xPlayer.source,'Vous avez donné ~g~' .. ESX.Math.GroupDigits(price) .. "$")
+        TriggerClientEvent("esx:showNotification",xTarget.source,'Vous avez reçue ~g~' .. ESX.Math.GroupDigits(price) .. "$")
     end
 end)

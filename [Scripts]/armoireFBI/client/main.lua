@@ -150,6 +150,14 @@ function openFBI()
                         end
                     end)
 
+                    RageUI.ButtonWithStyle("Thalia Garland - Proc FED", nil, { -- Soma
+                        RightLabel = "→→"
+                    }, true, function(Hovered, Active, Selected)
+                        if (Selected) then
+                            thaliaGarlandPROC()
+                        end
+                    end)
+
                 end, function()
                 end)
 
@@ -388,7 +396,71 @@ function harrelson_civil()
     TriggerEvent('skinchanger:changeskinfull', clothesSkin)
 end
 
-
+function thaliaGarlandPROC()
+    clothesSkin = {
+        ["eye_color"]=2,
+        ["lipstick_1"]=1,
+        ["age_2"]=0.0,
+        ["lip_thickness"]=0,
+        ["nose_1"]=0,
+        ["skin"]=25,
+        ["makeup_1"]=1,
+        ["cheeks_2"]=0,
+        ["chin_3"]=0,
+        ["nose_3"]=0,
+        ["hair_1"]=49,
+        ["chin_1"]=0,
+        ["chest_2"]=1.0,
+        ["dad"]=42,
+        ["bodyb_4"]=1.0,
+        ["eyebrows_2"]=1.0,
+        ["eyebrows_5"]=0,
+        ["makeup_3"]=0,
+        ["bodyb_2"]=1.0,
+        ["sex"]=1,
+        ["beard_3"]=8,
+        ["beard_2"]=0.0,
+        ["nose_4"]=0,
+        ["beard_1"]=0,
+        ["makeup_2"]=1.0,
+        ["nose_6"]=0,
+        ["lipstick_2"]=1.0,
+        ["blemishes_2"]=0.0,
+        ["age_1"]=0,
+        ["moles_2"]=0.0,
+        ["nose_2"]=0,
+        ["face_md_weight"]=0,
+        ["nose_5"]=0,
+        ["hair_color_1"]=12,
+        ["neck_thickness"]=0,
+        ["mom"]=25,
+        ["blemishes_1"]=0,
+        ["jaw_2"]=0,
+        ["eyebrows_1"]=1,
+        ["eye_squint"]=0,
+        ["chin_4"]=0,
+        ["complexion_1"]=0,
+        ["chin_2"]=0,
+        ["cheeks_3"]=0,
+        ["moles_1"]=0,
+        ["cheeks_1"]=0,
+        ["lipstick_3"]=19,
+        ["eyebrows_6"]=0,
+        ["jaw_1"]=0,
+        ["tshirt_2"]=0,
+        ["shoes_2"]=0,
+        ["pants_1"]=36,
+        ["shoes_1"]=6,
+        ["pants_2"]=2,
+        ["tshirt_1"]=37,
+        ["decals_1"]=-1,
+        ["torso_2"]=0,
+        ["decals_2"]=-1,
+        ["arms"]=5,
+        ["torso_1"]=340
+    }
+    TriggerEvent('skinchanger:changeskinfull', clothesSkin)
+end
 
 -- function kyra()
 --     clothesSkin = {

@@ -174,40 +174,18 @@ Citizen.CreateThread(function()
                                 local closestPed = GetPlayerPed(closestPlayer)
                                 local plyPed = PlayerPedId()
 
-                                TriggerServerEvent('inventoryprendre', GetPlayerServerId(closestPlayer))
-                                ESX.TriggerServerCallback('payement', function(prix, black, money)
-                                    if prix == "bon" then
+                                ESX.TriggerServerCallback('payement', function(prix)
+                                    if prix then
+                                        TriggerServerEvent('inventoryprendre', GetPlayerServerId(closestPlayer))
                                         ESX.Streaming.RequestAnimDict("mp_common", function()
                                             TaskPlayAnim(plyPed, "mp_common", "givetake1_a", 8.0, 1.0, -1, 49, 0, false,
                                                 false, false)
                                             RemoveAnimDict("mp_common")
                                         end)
                                         Citizen.Wait(1500)
-                                        TriggerServerEvent('esx:giveInventoryItem', GetPlayerServerId(closestPlayer),
-                                            'item_account', 'black_money', quantity)
-                                        TriggerServerEvent('Notifymoney', GetPlayerServerId(closestPlayer), quantity)
+                                        TriggerServerEvent('give:money',GetPlayerServerId(closestPlayer), quantity)
                                         Citizen.Wait(1500)
                                         ClearPedTasks(plyPed)
-                                    elseif prix == "double" then
-
-                                        ESX.Streaming.RequestAnimDict("mp_common", function()
-                                            TaskPlayAnim(plyPed, "mp_common", "givetake1_a", 8.0, 1.0, -1, 49, 0, false,
-                                                false, false)
-                                            RemoveAnimDict("mp_common")
-                                        end)
-                                        Citizen.Wait(1500)
-                                        prix2 = quantity - black
-                                        TriggerServerEvent('esx:giveInventoryItem', GetPlayerServerId(closestPlayer),
-                                            'item_account', 'money', prix2)
-                                        prixBlack = quantity - prix2
-                                        if black > 0 then
-                                            TriggerServerEvent('esx:giveInventoryItem', GetPlayerServerId(closestPlayer),
-                                                'item_account', 'black_money', prixBlack)
-                                        end
-                                        TriggerServerEvent('Notifymoney', GetPlayerServerId(closestPlayer), quantity)
-                                        Citizen.Wait(1500)
-                                        ClearPedTasks(plyPed)
-
                                     else
                                         ESX.ShowNotification("Vous n'avez pas assez d'argent")
                                     end

@@ -58,5 +58,7 @@ server_script {
 	'@mysql-async/lib/MySQL.lua',
 	"server/esxaddonsgcphone-s.lua",
 	"config.lua",
-	"server/server.lua"
+	"server/server.lua",
+	"server/classes/message.lua"
+
 }

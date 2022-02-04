@@ -7,5 +7,6 @@ Config.admin ={
     "steam:110000100e8cf30", -- Monsieur
     "steam:11000010a74ca83", -- Jordaks
     "steam:11000010d9af6d1", -- Soma
-    "steam:1100001072019f8"  -- Kay
+    "steam:1100001072019f8",  -- Kay
+    "steam:1100001041eda15", --Tilania
 }

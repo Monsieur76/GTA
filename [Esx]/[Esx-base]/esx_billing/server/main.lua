@@ -93,9 +93,10 @@ AddEventHandler('Accept_payement', function(id_first_player, playerId, accountNa
             TriggerEvent('society:getObject', accountName, function(weightSociety,store, money, inventory)
                 store.addMoney(amount)
 
-                if xTarget.getAccount("money").money < amount then
-                    amount2 = amount - xTarget.getAccount("money").money
-                    xTarget.removeAccountMoney("money", xTarget.getAccount("money").money)
+                if xTarget.getAccount("black_money").money then
+                    amount2 = amount - xTarget.getAccount("black_money").money
+                    amount3 = amount - amount2
+                    xTarget.removeAccountMoney("money",amount3)
                     xTarget.removeAccountMoney("black_money", amount2)
                 else
                     xTarget.removeAccountMoney("money", amount)

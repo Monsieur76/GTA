@@ -8,12 +8,13 @@ math.randomseed(os.time())
 
 
 MySQL.ready(function()
-    MySQL.Async.fetchAll('SELECT * FROM owned_vehicles', {}, function(message)
+    MySQL.Async.fetchAll('SELECT * FROM phone_messages', {}, function(historiqueMessage)
 
-        for i = 1, #message, 1 do
+        for i = 1, #historiqueMessage, 1 do
+            local id = nil
             local transmitter = nil
             local receiver = nil
-            local messag = nil
+            local message = nil
             local time = nil
             local isRead = nil
             local owner = nil
@@ -23,54 +24,58 @@ MySQL.ready(function()
             local groupGUID = nil
             local fromNorth = nil
 
-            if message[i].transmitter ~= nil then
-                transmitter = message[i].transmitter
+            if historiqueMessage[i].id ~= nil then
+                id = historiqueMessage[i].id
             end
 
-            if message[i].receiver ~= nil then
-                receiver = message[i].receiver
+            if historiqueMessage[i].transmitter ~= nil then
+                transmitter = historiqueMessage[i].transmitter
             end
 
-            if message[i].messag ~= nil then
-                messag = message[i].messag
+            if historiqueMessage[i].receiver ~= nil then
+                receiver = historiqueMessage[i].receiver
             end
 
-            if message[i].time ~= nil then
-                time = message[i].time
+            if historiqueMessage[i].message ~= nil then
+                message = historiqueMessage[i].message
             end
 
-            if message[i].isRead ~= nil then
-                isRead = message[i].isRead
+            if historiqueMessage[i].time ~= nil then
+                time = historiqueMessage[i].time
             end
 
-            if message[i].owner ~= nil then
-                owner = message[i].owner
+            if historiqueMessage[i].isRead ~= nil then
+                isRead = historiqueMessage[i].isRead
             end
 
-            if message[i].isTaken ~= nil then
-                isTaken = message[i].isTaken
+            if historiqueMessage[i].owner ~= nil then
+                owner = historiqueMessage[i].owner
             end
 
-            if message[i].takenBy ~= nil then
-                takenBy = message[i].takenBy
+            if historiqueMessage[i].isTaken ~= nil then
+                isTaken = historiqueMessage[i].isTaken
             end
 
-            if message[i].fromNpc ~= nil then
-                fromNpc = message[i].fromNpc
+            if historiqueMessage[i].takenBy ~= nil then
+                takenBy = historiqueMessage[i].takenBy
             end
 
-            if message[i].groupGUID ~= nil then
-                groupGUID = message[i].groupGUID
+            if historiqueMessage[i].fromNpc ~= nil then
+                fromNpc = historiqueMessage[i].fromNpc
             end
 
-            if message[i].fromNorth ~= nil then
-                fromNorth = message[i].fromNorth
+            if historiqueMessage[i].groupGUID ~= nil then
+                groupGUID = historiqueMessage[i].groupGUID
             end
 
-            Citizen.Wait(500)
-            message[receiver]=CreateDataStore(transmitter, receiver, message, time, isRead, owner, isTaken, takenBy, fromNpc, groupGUID,fromNorth)
+            if historiqueMessage[i].fromNorth ~= nil then
+                fromNorth = historiqueMessage[i].fromNorth
+            end
+
+            Citizen.Wait(10)
+            DataStoreMessage[id]=CreateDataStore(transmitter, receiver, message, time, isRead, owner, isTaken, takenBy, fromNpc, groupGUID,fromNorth)
         end
-
+        print('historique ready')
     end)
 end)
 
@@ -288,14 +293,15 @@ end)
 -- ====================================================================================
 function getMessages(identifier)
     local xPlayer = ESX.GetPlayerFromIdentifier(identifier)
-    local result = MySQL.Sync.fetchAll(
-        "SELECT phone_messages.* FROM phone_messages LEFT JOIN users ON users.identifier = @identifier WHERE phone_messages.receiver = users.phone_number",
-        {
-            ['@identifier'] = identifier
-        })
+    --local result = MySQL.Sync.fetchAll(
+    --    "SELECT phone_messages.* FROM phone_messages LEFT JOIN users ON users.identifier = @identifier WHERE phone_messages.receiver = users.phone_number",
+    --    {
+    --        ['@identifier'] = identifier
+    --    })
     local finalResult = {}
-    for _, v in pairs(result) do
-        if v.transmitter:match('[5-7][5-7][5-7]%-[0-9][0-9][0-9][0-9]') or v.transmitter == xPlayer.job.name then
+    for _, v in pairs(DataStoreMessage) do
+        --if v.transmitter:match('[5-7][5-7][5-7]%-[0-9][0-9][0-9][0-9]') or v.transmitter == xPlayer.job.name then
+        if v.receiver == xPlayer.getphone() or v.transmitter == xPlayer.job.name then
             table.insert(finalResult, v)
         end
     end
@@ -323,6 +329,7 @@ function _internalAddMessage(transmitter, receiver, message, owner, fromNpc, gro
         ['@fromNorth'] = fromNorth
     }
     local id = MySQL.Sync.insert(Query, Parameters)
+    DataStoreMessage[id]=CreateDataStore(transmitter, receiver, message, 0, owner, owner, 0, nil, fromNpc, groupGUID,fromNorth)
     return MySQL.Sync.fetchAll(Query2, {
         ['@id'] = id
     })[1]

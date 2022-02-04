@@ -266,6 +266,10 @@ Citizen.CreateThread(function()
     end
 end)
 
+---------------------
+------ Mission ------
+---------------------
+
 Citizen.CreateThread(function()
     while true do
         if onJob then

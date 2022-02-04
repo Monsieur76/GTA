@@ -1,5 +1,5 @@
 function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, weight, job, loadout, name, coords,
-    canne, maladie, diplomas,phone,MaxWeight)
+    canne, maladie, diplomas,phone,MaxWeight,service)
     local self = {}
 
     self.accounts = accounts
@@ -19,6 +19,7 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
     self.maladie = maladie
     self.diplomas = diplomas
     self.phone = phone
+    self.service = 0
 
     if Config.Multichar then
         self.license = 'license' .. string.sub(identifier, 6)
@@ -557,6 +558,15 @@ function CreateExtendedPlayer(playerId, identifier, group, accounts, inventory, 
 
     self.showHelpNotification = function(msg, thisFrame, beep, duration)
         self.triggerEvent('esx:showHelpNotification', msg, thisFrame, beep, duration)
+    end
+
+    self.getService = function ()
+       return self.service 
+    end
+
+    self.setService = function(service)
+        self.service = service
+        return self.service 
     end
 
     return self

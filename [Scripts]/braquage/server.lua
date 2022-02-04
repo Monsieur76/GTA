@@ -48,7 +48,7 @@ ESX.RegisterServerCallback('loffe_robbery:canRob', function(source, cb, store)
     local xPlayers = ESX.GetPlayers()
     for i = 1, #xPlayers do
         local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-        if xPlayer.job.name == "police" or xPlayer.job.name == "policeNorth" then
+        if xPlayer.job.name == "police" or xPlayer.job.name == "policeNorth" and xPlayer.getService() then
             cops = cops + 1
         end
     end

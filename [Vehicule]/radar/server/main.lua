@@ -63,7 +63,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                             price .. "$~w~ et " .. point .. " points.", 'CHAR_MP_PROF_BOSS', nil)
                                             for i = 1, #xPlayersAll, 1 do
                                                 local xPlayer = ESX.GetPlayerFromId(xPlayersAll[i])
-                                                if xPlayer.job.name:find('police') then
+                                                if xPlayer.job.name:find('police') and xPlayer.getService() then
                                                     TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, "FLASH", "",
                                                         rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H", 'CHAR_MP_PROF_BOSS', nil)
                                                 end
@@ -78,7 +78,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                 "$", 'CHAR_MP_PROF_BOSS', nil)
                         for i = 1, #xTarget, 1 do
                             local xTarget = ESX.GetPlayerFromId(xTarget[i])
-                            if xTarget.job.name:find('police') then
+                            if xTarget.job.name:find('police') and xPlayer.getService() then
                                 TriggerClientEvent('esx:showAdvancedNotification', xTarget.source, "FLASH", "",
                                     rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H .", 'CHAR_MP_PROF_BOSS', nil)
                             end
@@ -111,7 +111,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                         'CHAR_MP_PROF_BOSS', nil)
                                         for i = 1, #xPlayersAll, 1 do
                                             local xPlayer = ESX.GetPlayerFromId(xPlayersAll[i])
-                                            if xPlayer.job.name:find('police') then
+                                            if xPlayer.job.name:find('police') and xPlayer.getService() then
                                                 TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, "FLASH", "",
                                                     rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H", 'CHAR_MP_PROF_BOSS', nil)
                                             end
@@ -132,7 +132,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                             price .. "$~w~ et " .. point .. " points.", 'CHAR_MP_PROF_BOSS', nil)
                                             for i = 1, #xPlayersAll, 1 do
                                                 local xPlayer = ESX.GetPlayerFromId(xPlayersAll[i])
-                                                if xPlayer.job.name:find('police') then
+                                                if xPlayer.job.name:find('police') and xPlayer.getService() then
                                                     TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, "FLASH", "",
                                                         rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H", 'CHAR_MP_PROF_BOSS', nil)
                                                 end
@@ -147,7 +147,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                 "$", 'CHAR_MP_PROF_BOSS', nil)
                         for i = 1, #xTarget, 1 do
                             local xTarget = ESX.GetPlayerFromId(xTarget[i])
-                            if xTarget.job.name:find('police') then
+                            if xTarget.job.name:find('police') and xTarget.getService() then
                                 TriggerClientEvent('esx:showAdvancedNotification', xTarget.source, "FLASH", "",
                                     rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H .", 'CHAR_MP_PROF_BOSS', nil)
                             end
@@ -181,7 +181,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                         'CHAR_MP_PROF_BOSS', nil)
                                         for i = 1, #xPlayersAll, 1 do
                                             local xPlayer = ESX.GetPlayerFromId(xPlayersAll[i])
-                                            if xPlayer.job.name:find('police') then
+                                            if xPlayer.job.name:find('police') and xPlayer.getService() then
                                                 TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, "FLASH", "",
                                                     rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H", 'CHAR_MP_PROF_BOSS', nil)
                                             end
@@ -202,7 +202,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                             price .. "$~w~ et " .. point .. " points.", 'CHAR_MP_PROF_BOSS', nil)
                                             for i = 1, #xPlayersAll, 1 do
                                                 local xPlayer = ESX.GetPlayerFromId(xPlayersAll[i])
-                                                if xPlayer.job.name:find('police') then
+                                                if xPlayer.job.name:find('police') and xPlayer.getService() then
                                                     TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, "FLASH", "",
                                                         rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H", 'CHAR_MP_PROF_BOSS', nil)
                                                 end
@@ -218,7 +218,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
 
                         for i = 1, #xTarget, 1 do
                             local xTarget = ESX.GetPlayerFromId(xTarget[i])
-                            if xTarget.job.name:find('police') then
+                            if xTarget.job.name:find('police') and xTarget.getService() then
                                 TriggerClientEvent('esx:showAdvancedNotification', xTarget.source, "FLASH", "",
                                     rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H .", 'CHAR_MP_PROF_BOSS', nil)
 
@@ -241,7 +241,7 @@ AddEventHandler('vehicleVole', function(rue, point, plate, price, vehicleClass, 
         "Vous avez été flashé à " .. math.ceil(speeding) .. "km/h.", 'CHAR_MP_PROF_BOSS', nil)
     for i = 1, #xPlayers, 1 do
         local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
-        if xPlayer.job.name:find('police') then
+        if xPlayer.job.name:find('police') and xPlayer.getService() then
             TriggerClientEvent('esx:showAdvancedNotification', xPlayer.source, "FLASH", "",
                 rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H ~r~(volé)", 'CHAR_MP_PROF_BOSS', nil)
         end
