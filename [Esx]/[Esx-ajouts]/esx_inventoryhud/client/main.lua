@@ -11,14 +11,13 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNUICallback("NUIFocusOff", function(data, cb)
-    local isTrunk = from == "trunk"
+    local isTrunk = data.type
     local isFrigo = from == "frigo"
     local isSocietyVault = from == "vault"
     local isArmory = from == "armory"
     local isConfiscation = from == "confiscation"
     local isCoffreAppartement = from == "coffre_appartement"
     local isCoffreFortAppartement = from == "coffreFort_appartement"
-    print('ici')
     SendNUIMessage({
         action = "hide"
     })
@@ -26,8 +25,8 @@ RegisterNUICallback("NUIFocusOff", function(data, cb)
     elseif isArmory then
     elseif isFrigo then
     elseif isSocietyVault then
-    elseif isTrunk then
-        local vehicle, dist = ESX.Game.GetClosestVehicle(coords)
+    elseif data.type == "trunk" then
+        local vehicle, dist = ESX.Game.GetClosestVehicle()
         SetVehicleDoorShut(vehicle, 5, false, false)
         SetNuiFocus(false, false)    
     elseif isCoffreAppartement then

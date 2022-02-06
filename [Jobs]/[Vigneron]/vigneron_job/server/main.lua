@@ -73,14 +73,14 @@ AddEventHandler('vigne:vente', function(name, label, count, prix)
     xPlayer.removeInventoryItem(name, count)
     -- xPlayer.addMoney(1 * count)
     vigne = count * prix
-	mairie = vigne * 0.2
-	moneys = vigne - mairie
+	-- mairie = vigne * 0.2
+	moneys = vigne
     TriggerEvent('society:getObject', "vigne", function(weightSociety,store, money, inventory)
         store.addMoney(moneys)
     end)
-    TriggerEvent('society:getObject', "mairie", function(weightSociety,store, money, inventory)
-        store.addMoney(mairie)
-    end)
+    -- TriggerEvent('society:getObject', "mairie", function(weightSociety,store, money, inventory)
+    --     store.addMoney(mairie)
+    -- end)
     if name == "radio" then
         TriggerClientEvent('ls-radio:onRadioDrop', xPlayer.source)
     end

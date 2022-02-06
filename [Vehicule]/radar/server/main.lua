@@ -78,7 +78,7 @@ AddEventHandler('esx_radars:sendBill', function(rue, point, plate, price, vehicl
                                 "$", 'CHAR_MP_PROF_BOSS', nil)
                         for i = 1, #xTarget, 1 do
                             local xTarget = ESX.GetPlayerFromId(xTarget[i])
-                            if xTarget.job.name:find('police') and xPlayer.getService() then
+                            if xTarget.job.name:find('police') and xTarget.getService() then
                                 TriggerClientEvent('esx:showAdvancedNotification', xTarget.source, "FLASH", "",
                                     rue .. ". ~g~(" .. plate .. ")~b~ " .. math.ceil(speeding) .. "KM/H .", 'CHAR_MP_PROF_BOSS', nil)
                             end

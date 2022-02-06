@@ -139,17 +139,9 @@ function rangervoiture()
 end
 
 function etatrangervoiture(vehicle, vehicleProps)
-    local attempt = 0
-
-    while not NetworkHasControlOfEntity(vehicle) and attempt < 100 and DoesEntityExist(vehicle) do
-        Citizen.Wait(100)
-        NetworkRequestControlOfEntity(vehicle)
-        attempt = attempt + 1
-    end
-
-    if DoesEntityExist(vehicle) and NetworkHasControlOfEntity(vehicle) then
+    NetworkRequestControlOfEntity(vehicle)
+    Citizen.Wait(2000)
     ESX.Game.DeleteVehicle(vehicle)
-    end
     TriggerServerEvent('h4ci_garage:etatvehiculesortieentreprise', vehicleProps, garageWho)
     TriggerServerEvent('ddx_vehiclelock:deleteKey', vehicleProps.plate)
     ESX.ShowNotification('Votre véhicule est rangé dans le garage.')

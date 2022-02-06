@@ -202,13 +202,9 @@ AddEventHandler('burger:vente', function(name, label, count, prix)
     xPlayer.removeInventoryItem(name, count)
     -- xPlayer.addMoney(1 * count)
     burgershot = count * prix
-	mairie = burgershot * 0.2
-	moneys = burgershot - mairie
+	moneys = burgershot
     TriggerEvent('society:getObject', "burgershot", function(weightSociety,store, money, inventory)
         store.addMoney(moneys)
-    end)
-    TriggerEvent('society:getObject', "burgershot", function(weightSociety,store, money, inventory)
-        store.addMoney(mairie)
     end)
     if name == "radio" then
         TriggerClientEvent('ls-radio:onRadioDrop', xPlayer.source)
@@ -217,3 +213,31 @@ AddEventHandler('burger:vente', function(name, label, count, prix)
     TriggerClientEvent("esx:showNotification", xPlayer.source, "Vous avez vendu ~r~" .. count .. " " .. label)
 
 end)
+
+
+RegisterServerEvent('RetirerBurgerInventaire')
+AddEventHandler('RetirerBurgerInventaire', function(number, name, prix, label)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    xPlayer.removeInventoryItem(name, number)
+    moneys = number * prix
+    TriggerEvent('society:getObject', "burgershot", function(weightSociety,store, money, inventory)
+        store.addMoney(moneys)
+    end)
+    if name == "radio" then
+        TriggerClientEvent('ls-radio:onRadioDrop', xPlayer.source)
+    end
+    TriggerClientEvent("esx:showNotification", xPlayer.source, "Vous avez livrer ~r~" .. number .. " " .. label)
+end)
+
+-- RegisterServerEvent('getBurgerAmount')
+-- AddEventHandler('getBurgerAmount', function(item)
+--     local xPlayer = ESX.GetPlayerFromId(source)
+--     local quantity = xPlayer.getInventoryItem(item).count
+--     TriggerClientEvent('esx:showNotification', xPlayer.source, quantity)
+-- end)
+
+-- ESX.RegisterServerCallback('getItemAmount', function(source, cb, item)
+--     local xPlayer = ESX.GetPlayerFromId(source)
+--     local quantity = xPlayer.getInventoryItem(item).count
+--     cb(quantity)
+-- end)

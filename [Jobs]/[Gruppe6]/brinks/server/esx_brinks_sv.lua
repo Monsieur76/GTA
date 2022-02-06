@@ -17,14 +17,14 @@ AddEventHandler('poseDeSacCoffre', function(item)
     local count = xPlayer.getInventoryItem(item).count
     xPlayer.removeInventoryItem(item, count)
     prix = count * Config.price
-    mairie = prix * 0.2
-    moneys = prix - mairie
+    -- mairie = prix * 0.2
+    moneys = prix
     TriggerEvent('society:getObject', "brinks", function(weightSociety,store, money, inventory)
         store.addMoney(moneys)
     end)
-    TriggerEvent('society:getObject', "mairie", function(weightSociety,store, money, inventory)
-        store.addMoney(mairie)
-    end)
+    -- TriggerEvent('society:getObject', "mairie", function(weightSociety,store, money, inventory)
+    --     store.addMoney(mairie)
+    -- end)
     TriggerClientEvent('esx:showNotification', xPlayer.source, "~r~Vous avez déposé " .. count .. " sac")
 end)
 

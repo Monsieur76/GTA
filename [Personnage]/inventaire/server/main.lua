@@ -56,6 +56,8 @@ AddEventHandler('give:money', function(target_id, price)
     elseif black ~= 0 and black < price then
         print('la')
         totalrestepayer = price - black
+        print(black)
+        print(totalrestepayer)
         xPlayer.removeAccountMoney('black_money', black)
         xTarget.addAccountMoney('black_money', black)
         TriggerClientEvent("esx:showNotification",xPlayer.source,'Vous avez donné ~r~' .. ESX.Math.GroupDigits(black) .. "$")

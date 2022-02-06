@@ -282,6 +282,7 @@ function rangervoiture()
                     Citizen.Wait(10000)
                     local vehicle, dist4 = ESX.Game.GetClosestVehicle()
                     if dist4 < 2 then
+
                         etatrangervoiture(vehicle, vehicleProps)
                     else
                         ESX.ShowNotification('Pas de véhicule à proximité')

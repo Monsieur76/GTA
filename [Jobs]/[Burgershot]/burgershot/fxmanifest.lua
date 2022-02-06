@@ -31,6 +31,7 @@ client_scripts {
 	'client/cl_boss.lua',
 	'client/cl_vestiaire.lua',
 	'client/main.lua',
+	'client/cl_mission.lua'
 }
 
 server_scripts {

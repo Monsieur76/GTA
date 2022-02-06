@@ -60,6 +60,9 @@ ESX.RegisterServerCallback('societyConfiscation:getWeight', function(source, cb,
     cb(GetSharedDataStore(society))
 end)
 
+AddEventHandler("society:getObject", function(society, cb)
+    cb(GetSharedDataStore(society))
+end)
 
 RegisterServerEvent("confiscation:getItem")
 AddEventHandler("confiscation:getItem", function(type, item, label, count, confiscationMax, playerMax, society,ammo)

@@ -97,18 +97,13 @@ Citizen.CreateThread(function()
 
 ---------------------------------------------
 
-local position = {
-    {x = -1177.86, y = -895.33, z = 12.98}
-}
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        for k in pairs(position) do
-            if ESX.PlayerData.job and ESX.PlayerData.job.name == 'burgershot' and ESX.PlayerData.job.grade_name == 'boss' then 
+        if ESX.PlayerData.job and ESX.PlayerData.job.name == 'burgershot' and ESX.PlayerData.job.grade_name == 'boss' then 
             local plyCoords = GetEntityCoords(PlayerPedId(), false)
-            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, position[k].x, position[k].y, position[k].z)
-            DrawMarker(1, position[k].x, position[k].y, position[k].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.25, 25, 95, 255, 255, false, 95, 255, 0, nil, nil, 0)
+            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.posBurger.Boss.x, Config.posBurger.Boss.y, Config.posBurger.Boss.z)
+            DrawMarker(1, Config.posBurger.Boss.x, Config.posBurger.Boss.y, Config.posBurger.Boss.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.5, 0.5, 0.25, 25, 95, 255, 255, false, 95, 255, 0, nil, nil, 0)
 
             if dist <= 2.0  then
                 ESX.ShowHelpNotification("~INPUT_CONTEXT~ Actions patron")
@@ -122,7 +117,6 @@ Citizen.CreateThread(function()
             end
         end
     end
-end
 end)
 
 

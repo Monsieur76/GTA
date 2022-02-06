@@ -1,6 +1,7 @@
 ESX = nil
 local PlayerData = {}
 local PlayerName = nil
+local veh = nil
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -38,10 +39,12 @@ end)
 function openmenuvehicle()
     local playerPed = PlayerPedId()
     local coords = GetEntityCoords(playerPed)
+    veh = nil
     local vehicle, dist = ESX.Game.GetClosestVehicle(coords)
+    veh = vehicle
     local plate = GetVehicleNumberPlateText(vehicle)
     --if PlayerName == nil then
-    if dist < 3.0 then
+    if dist < 5.0 then
         if not IsPedInAnyVehicle(playerPed) then
             if vehicle ~= nil then
                 myVeh = false

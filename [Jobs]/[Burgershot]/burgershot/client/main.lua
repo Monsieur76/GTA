@@ -1,7 +1,6 @@
-local saladeblips = AddBlipForCoord(2015.31, 4886.9, 42.73)
-local tomateblips = AddBlipForCoord(1897.35, 4847.73, 46.18)
-local oignonblips = AddBlipForCoord(1885.09, 5055.98, 49.97)
-local venteblips = AddBlipForCoord(-16.53, 216.4, 105.74)
+local saladeblips = AddBlipForCoord(Config.blips.Salade.x, Config.blips.Salade.y, Config.blips.Salade.z)
+local tomateblips = AddBlipForCoord(Config.blips.Tomate.x, Config.blips.Tomate.y, Config.blips.Tomate.z)
+local oignonblips = AddBlipForCoord(Config.blips.Oignon.x, Config.blips.Oignon.y, Config.blips.Oignon.z)
 
 local Keys = {
     ["ESC"] = 322,
@@ -84,6 +83,13 @@ local Keys = {
 local traitement = false
 local recolte = false
 local menu = false
+local BLIP_1 = nil
+local onJob = nil
+local RecupDeBurger = nil
+local livraison = nil
+local burgerLivraison = nil
+livraisonEnCours = false
+
 ESX = nil
 local metier
 IsDead = false
@@ -118,12 +124,10 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
         SetBlipDisplay(saladeblips, 4)
         SetBlipDisplay(tomateblips, 4)
         SetBlipDisplay(oignonblips, 4)
-        SetBlipDisplay(venteblips, 4)
     else
         SetBlipDisplay(saladeblips, 0)
         SetBlipDisplay(tomateblips, 0)
         SetBlipDisplay(oignonblips, 0)
-        SetBlipDisplay(venteblips, 0)
     end
 end)
 
@@ -134,12 +138,10 @@ AddEventHandler('esx:setJob', function(job)
         SetBlipDisplay(saladeblips, 4)
         SetBlipDisplay(tomateblips, 4)
         SetBlipDisplay(oignonblips, 4)
-        SetBlipDisplay(venteblips, 4)
     else
         SetBlipDisplay(saladeblips, 0)
         SetBlipDisplay(tomateblips, 0)
         SetBlipDisplay(oignonblips, 0)
-        SetBlipDisplay(venteblips, 0)
     end
 end)
 
@@ -205,9 +207,55 @@ function KeyboardInput(textEntry, inputText, maxLength)
     end
 end
 
+function randomDelivery()
+    rand = math.random(1, 30)
+    if onJob then
+        burgerLivraison = math.random(Config.minRec, Config.maxRec)
+        for k, v in ipairs(Config.deliveryBurger) do
+            if v.name == rand then
+                x = v.x
+                y = v.y
+                z = v.z-1
+                name = v.name
+            end
+        end
+        print(name)
+        BLIP_1 = AddBlipForCoord(x, y, z)
+        SetBlipSprite(BLIP_1, 38)
+        SetBlipColour(BLIP_1, 1)
+        SetBlipRoute(BLIP_1, true)
+    else
+        if BLIP_1 ~= nil then
+            RemoveBlip(BLIP_1)
+        end
+    end
+end
+
+function devPointLivraison()
+    onJob = true
+    if onJob then
+        for k, v in ipairs(Config.deliveryBurger) do
+            x = v.x
+            y = v.y
+            z = v.z-1
+            name = v.name
+            DrawMarker(1, x, y, z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 25, 95, 255, 255, false, 95, 255, 0, nil, nil, 0)
+            BLIP_1 = AddBlipForCoord(x, y, z)
+            SetBlipSprite(BLIP_1, 38)
+            SetBlipColour(BLIP_1, 1)
+            SetBlipRoute(BLIP_1, true)
+            print(name)
+        end
+    else
+        if BLIP_1 ~= nil then
+            RemoveBlip(BLIP_1)
+        end
+    end
+end
+
 ----------------------------------blips
 
-local burgershot = AddBlipForCoord(-1184.81, -885.27, 14.03)
+local burgershot = AddBlipForCoord(Config.blips.Restau.x, Config.blips.Restau.y, Config.blips.Restau.z)
 
 SetBlipSprite(burgershot, 536)
 SetBlipColour(burgershot, 1)
@@ -223,7 +271,7 @@ SetBlipColour(saladeblips, 2)
 SetBlipScale(saladeblips, 0.90)
 SetBlipAsShortRange(saladeblips, true)
 BeginTextCommandSetBlipName('STRING')
-AddTextComponentString("Récolte de salade")
+AddTextComponentString("Récolte de Salade")
 EndTextCommandSetBlipName(saladeblips)
 -- tomate
 SetBlipSprite(tomateblips, 655)
@@ -231,7 +279,7 @@ SetBlipColour(tomateblips, 1)
 SetBlipScale(tomateblips, 0.90)
 SetBlipAsShortRange(tomateblips, true)
 BeginTextCommandSetBlipName('STRING')
-AddTextComponentString("Récolte de tomate")
+AddTextComponentString("Récolte de Tomate")
 EndTextCommandSetBlipName(tomateblips)
 -- oignon
 SetBlipSprite(oignonblips, 655)
@@ -239,16 +287,16 @@ SetBlipColour(oignonblips, 5)
 SetBlipScale(oignonblips, 0.90)
 SetBlipAsShortRange(oignonblips, true)
 BeginTextCommandSetBlipName('STRING')
-AddTextComponentString("Récolte de oignon")
+AddTextComponentString("Récolte d'Oignon")
 EndTextCommandSetBlipName(oignonblips)
 -- vente
-SetBlipSprite(venteblips, 500)
-SetBlipColour(venteblips, 1)
-SetBlipScale(venteblips, 0.90)
-SetBlipAsShortRange(venteblips, true)
-BeginTextCommandSetBlipName('STRING')
-AddTextComponentString("Export du Burgershot")
-EndTextCommandSetBlipName(venteblips)
+-- SetBlipSprite(venteblips, 500)
+-- SetBlipColour(venteblips, 1)
+-- SetBlipScale(venteblips, 0.90)
+-- SetBlipAsShortRange(venteblips, true)
+-- BeginTextCommandSetBlipName('STRING')
+-- AddTextComponentString("Export du Burgershot")
+-- EndTextCommandSetBlipName(venteblips)
 
 -- récolte
 
@@ -508,13 +556,6 @@ function fabricburger()
     end
 end
 
--- Key Controls
-local posTraitement = {
-    x = -1202.22,
-    y = -897.0,
-    z = 14.0
-}
-
 -- Fabrication de menu --
 
 local menu_fabric = false
@@ -692,13 +733,6 @@ function fabricmenu()
     end
 end
 
--- Key Controls
-local posMenu = {
-    x = -1191.74,
-    y = -903.01,
-    z = 13.98
-}
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -706,12 +740,12 @@ Citizen.CreateThread(function()
 
             local playerPed = PlayerPedId()
             local plyCoords = GetEntityCoords(playerPed, false)
-            local jobdistmenu = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, posTraitement.x, posTraitement.y,
-                posTraitement.z - 1)
-            DrawMarker(1, posTraitement.x, posTraitement.y, posTraitement.z - 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
+            local jobdistmenu = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.posBurger.Traitement.x, Config.posBurger.Traitement.y,
+                Config.posBurger.Traitement.z - 1)
+            DrawMarker(1, Config.posBurger.Traitement.x, Config.posBurger.Traitement.y, Config.posBurger.Traitement.z - 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0,
                 0.25, 25, 95, 255, 255, false, 95, 255, 0, nil, nil, 0)
             if jobdistmenu < 1.5 then
-                ESX.ShowHelpNotification("~INPUT_CONTEXT~ Fabrication")
+                ESX.ShowHelpNotification("~INPUT_CONTEXT~ Cuisiner")
                 if IsControlJustReleased(0, 38) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
                     -- TaskStartScenarioInPlace(playerPed, "PROP_HUMAN_BBQ", 0, false)
                     fabricburger()
@@ -720,11 +754,11 @@ Citizen.CreateThread(function()
             if IsControlJustReleased(0, Keys["F6"]) then
                 openBurgerMenu()
             end
-            local jobdist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, posMenu.x, posMenu.y, posMenu.z - 1)
-            DrawMarker(1, posMenu.x, posMenu.y, posMenu.z - 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 25, 95,
+            local jobdist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.posBurger.Menu.x, Config.posBurger.Menu.y, Config.posBurger.Menu.z - 1)
+            DrawMarker(1, Config.posBurger.Menu.x, Config.posBurger.Menu.y, Config.posBurger.Menu.z - 1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 25, 95,
                 255, 255, false, 95, 255, 0, nil, nil, 0)
             if jobdist < 1.5 then
-                ESX.ShowHelpNotification("~INPUT_CONTEXT~ Fabrication Menu")
+                ESX.ShowHelpNotification("~INPUT_CONTEXT~ Emballage")
                 if IsControlJustReleased(0, 38) and not IsPedSittingInAnyVehicle(PlayerPedId()) then
                     -- TaskStartScenarioInPlace(playerPed, "PROP_HUMAN_BBQ", 0, false)
                     fabricmenu()
@@ -753,6 +787,7 @@ function openBurgerMenu()
 
         Citizen.CreateThread(function()
             while burgershot_menu do
+                ESX.PlayerData = ESX.GetPlayerData()
                 Citizen.Wait(1)
                 RageUI.IsVisible(RMenu:Get('burgershot_menu', 'main'), true, true, true, function()
 
@@ -765,6 +800,51 @@ function openBurgerMenu()
                             burgershot_menu = false
                         end
                     end)
+                    
+                    RageUI.ButtonWithStyle("Débuté/Arrêter Livraison", nil, {
+                        RightLabel = "→"
+                    }, true, function(Hovered, Active, Selected)
+                        if Selected then
+                            if onJob then
+                                onJob = false
+                                RecupDeBurger = false
+                                ESX.ShowNotification('Fin de la tournée de livraison.')
+                            else
+                                for i = 1, #ESX.PlayerData.inventory, 1 do
+                                    if (ESX.PlayerData.inventory[i].count ~= false) and (ESX.PlayerData.inventory[i].name == "veget_burger") then
+                                        if ESX.PlayerData.inventory[i].count > 0 then
+                                            currentBurger = ESX.PlayerData.inventory[i].count
+                                            print(currentBurger)
+                                            if currentBurger == nil then
+                                                currentBurger = 0
+                                            end
+                                            print(currentBurger)
+                                            if currentBurger ~= 0 then
+                                                onJob = true
+                                                ESX.ShowNotification('Début de la tournée de livraison.')
+                                            end
+                                        else
+                                            onJob = false
+                                            RecupDeBurger = false
+                                            ESX.ShowNotification('Vous avez aucun Burger sur vous.')
+                                        end
+                                    end
+                                end
+                            end
+                            randomDelivery()
+                            RageUI.CloseAll()
+                            burgershot_menu = false
+                        end
+                    end)
+                    -- RageUI.ButtonWithStyle("Point Livraison DEV", nil, {
+                    --     RightLabel = "→→"
+                    -- }, true, function(Hovered, Active, Selected)
+                    --     if (Selected) then
+                    --         devPointLivraison()
+                    --         RageUI.CloseAll()
+                    --         burgershot_menu = false
+                    --     end
+                    -- end)
                     if ESX.PlayerData.job.grade_name == 'boss' then
                         RageUI.ButtonWithStyle("Action patron", nil, {
                             RightLabel = "→"
@@ -879,93 +959,200 @@ end)
 
 ------ Vente Export ----------
 
-ConfPosBurgershot = {
-    {
-        x = -16.53,
-        y = 216.4,
-        z = 105.74,
-        h = 89.35
-    }
-}
+-- ConfPosBurgershot = {
+--     {
+--         x = -16.53,
+--         y = 216.4,
+--         z = 105.74,
+--         h = 89.35
+--     }
+-- }
 
-local taxeEtat = 1.2
-local prixBurger = 100
+-- local taxeEtat = 1.2
+-- local prixBurger = 100
 -- local prixJusRaisin = 5
 -- local prixVine = 12
 -- local prixGrandCru = 80
 
 
+-- Citizen.CreateThread(function()
+--     while true do
+--         Citizen.Wait(0)
+--         local playerCoords = GetEntityCoords(PlayerPedId())
+--             local distance = Vdist(playerCoords, ConfPosBurgershot[1].x, ConfPosBurgershot[1].y, ConfPosBurgershot[1].z, true)
+
+--             if distance <= 1.5 and not isDead then
+--                 ESX.ShowHelpNotification("~INPUT_CONTEXT~ Vendre des produits")
+--                 if IsControlJustPressed(1, 51) then
+--                     RageUI.Visible(RMenu:Get('export_burgershot', 'main'), not RageUI.Visible(RMenu:Get('export_burgershot', 'main')))
+--                 end
+--             end
+
+--             if zoneDistance ~= nil then
+--                 if zoneDistance > 1.5 then
+--                     RageUI.CloseAll()
+--                 end
+--             end
+--     end
+-- end)
+
+-- RMenu.Add('export_burgershot', 'main', RageUI.CreateMenu("Export Burgershot", "(Taxe Gouvernementale : 20%)" ))
+
+-- Citizen.CreateThread(function()
+--     while true do  
+--         RageUI.IsVisible(RMenu:Get('export_burgershot', 'main'), true, true, true, function()
+--             ESX.PlayerData = ESX.GetPlayerData()
+
+--             for i = 1, #ESX.PlayerData.inventory, 1 do
+--                 if ESX.PlayerData.inventory[i].count ~= false and (ESX.PlayerData.inventory[i].name == "veget_burger") then
+--                     if ESX.PlayerData.inventory[i].count > 0 then
+--                         invCount = {}
+--                         for i = 1, ESX.PlayerData.inventory[i].count, 1 do
+--                             table.insert(invCount, i)
+--                         end
+--                         if ESX.PlayerData.inventory[i].name == "veget_burger" then
+--                             prixItem = prixBurger
+--                         end
+--                         RageUI.ButtonWithStyle(ESX.PlayerData.inventory[i].label .. ' (' .. ESX.PlayerData.inventory[i].count .. ')', nil, { RightLabel = "~g~ ".. math.ceil(prixItem*taxeEtat) .." $"}, true, function(Hovered, Active, Selected)
+--                             if Selected then
+--                                 local valid, quantity = CheckQuantity(KeyboardInput("Quantité", "", 10))
+--                                 if not valid then
+--                                     ESX.ShowNotification("Quantité invalide")
+--                                 else
+--                                     if quantity <= ESX.PlayerData.inventory[i].count then
+--                                         TriggerServerEvent('burger:vente', ESX.PlayerData.inventory[i].name, ESX.PlayerData.inventory[i].label, quantity, prixItem)
+--                                     else
+--                                         ESX.ShowNotification("Quantité invalide")
+--                                     end
+--                                 end
+--                             end
+--                         end)
+--                     end
+--                 end
+--             end
+
+--         end, function()
+--         end)
+--         Citizen.Wait(0)
+--     end
+-- end)
+
+-- CreateThread(function()
+--     local hash = GetHashKey("s_m_y_chef_01")
+--     while not HasModelLoaded(hash) do
+--         RequestModel(hash)
+--         Wait(2000)
+--     end
+--     local ped = CreatePed("PED_TYPE_CIVMALE", "s_m_y_chef_01", ConfPosBurgershot[1].x, ConfPosBurgershot[1].y, ConfPosBurgershot[1].z, ConfPosBurgershot[1].h, false, true)
+--     SetBlockingOfNonTemporaryEvents(ped, true)
+--     FreezeEntityPosition(ped, true)
+--     SetEntityInvincible(ped, true)
+
+-- end)
+
+
+
+---------------
+--- Mission ---
+---------------
+
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
-        local playerCoords = GetEntityCoords(PlayerPedId())
-            local distance = Vdist(playerCoords, ConfPosBurgershot[1].x, ConfPosBurgershot[1].y, ConfPosBurgershot[1].z, true)
+        if onJob then
+            if ESX.PlayerData.job and ESX.PlayerData.job.name == 'burgershot' then
+                local plyCoords = GetEntityCoords(PlayerPedId(), false)
+                local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, x, y, z)
+                DrawMarker(1, x, y, z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 25, 95, 255, 255, false, 95, 255,
+                    0, nil, nil, 0)
+                inVehicle = IsPedInAnyVehicle(PlayerPedId(), false) 
+                if not inVehicle then
+                    if dist <= 2.0 then
+                        if livraisonEnCours == false then
+                            ESX.ShowHelpNotification("~INPUT_CONTEXT~ Livrer des burgers")
 
-            if distance <= 1.5 and not isDead then
-                ESX.ShowHelpNotification("~INPUT_CONTEXT~ Vendre des produits")
-                if IsControlJustPressed(1, 51) then
-                    RageUI.Visible(RMenu:Get('export_burgershot', 'main'), not RageUI.Visible(RMenu:Get('export_burgershot', 'main')))
-                end
-            end
-
-            if zoneDistance ~= nil then
-                if zoneDistance > 1.5 then
-                    RageUI.CloseAll()
-                end
-            end
-    end
-end)
-
-RMenu.Add('export_burgershot', 'main', RageUI.CreateMenu("Export Burgershot", "(Taxe Gouvernementale : 20%)" ))
-
-Citizen.CreateThread(function()
-    while true do  
-        RageUI.IsVisible(RMenu:Get('export_burgershot', 'main'), true, true, true, function()
-            ESX.PlayerData = ESX.GetPlayerData()
-
-            for i = 1, #ESX.PlayerData.inventory, 1 do
-                if ESX.PlayerData.inventory[i].count ~= false and (ESX.PlayerData.inventory[i].name == "veget_burger") then
-                    if ESX.PlayerData.inventory[i].count > 0 then
-                        invCount = {}
-                        for i = 1, ESX.PlayerData.inventory[i].count, 1 do
-                            table.insert(invCount, i)
-                        end
-                        if ESX.PlayerData.inventory[i].name == "veget_burger" then
-                            prixItem = prixBurger
-                        end
-                        RageUI.ButtonWithStyle(ESX.PlayerData.inventory[i].label .. ' (' .. ESX.PlayerData.inventory[i].count .. ')', nil, { RightLabel = "~g~ ".. math.ceil(prixItem*taxeEtat) .." $"}, true, function(Hovered, Active, Selected)
-                            if Selected then
-                                local valid, quantity = CheckQuantity(KeyboardInput("Quantité", "", 10))
-                                if not valid then
-                                    ESX.ShowNotification("Quantité invalide")
-                                else
-                                    if quantity <= ESX.PlayerData.inventory[i].count then
-                                        TriggerServerEvent('burger:vente', ESX.PlayerData.inventory[i].name, ESX.PlayerData.inventory[i].label, quantity, prixItem)
-                                    else
-                                        ESX.ShowNotification("Quantité invalide")
-                                    end
-                                end
+                            if IsControlJustPressed(1, 51) then
+                                local ped = PlayerPedId()
+                                RecupDeBurger = true
+                                livraisonEnCours = true
+                                TriggerEvent('burger:delivery', ped)
                             end
-                        end)
+                        end
                     end
                 end
             end
-
-        end, function()
-        end)
+        end
         Citizen.Wait(0)
     end
 end)
 
-CreateThread(function()
-    local hash = GetHashKey("s_m_y_chef_01")
-    while not HasModelLoaded(hash) do
-        RequestModel(hash)
-        Wait(2000)
-    end
-    local ped = CreatePed("PED_TYPE_CIVMALE", "s_m_y_chef_01", ConfPosBurgershot[1].x, ConfPosBurgershot[1].y, ConfPosBurgershot[1].z, ConfPosBurgershot[1].h, false, true)
-    SetBlockingOfNonTemporaryEvents(ped, true)
-    FreezeEntityPosition(ped, true)
-    SetEntityInvincible(ped, true)
-
+AddEventHandler('burger:delivery', function()
+    TriggerEvent('burger:deliveryRetrait', ped)
 end)
+
+AddEventHandler('burger:deliveryRetrait', function()
+    ESX.ShowNotification("Veuillez attendre la fin de la livraison")
+    -- local currentBurger = TriggerServerEvent('getBurgerAmount', Config.itemDb_name)
+    -- ESX.TriggerServerCallback('getItemAmount', function(quantity)
+    --     if quantity then
+    --         currentBurger = quantity            
+    --     end
+    -- end, Config.itemDb_name)
+    ESX.PlayerData = ESX.GetPlayerData()
+    ESX.Streaming.RequestStreamedTextureDict('DIA_CLIFFORD')
+
+    ESX.PlayAnim = function(dict, anim, speed, time, flag)
+        ESX.Streaming.RequestAnimDict(dict, function()
+            TaskPlayAnim(PlayerPedId(), dict, anim, speed, speed, time, flag, 1, false, false, false)
+        end)
+    end
+
+    obj = CreateObject(GetHashKey('prop_cs_burger_01'), 0, 0, 0, true)
+    AttachEntityToEntity(obj, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 57005), 0.13, 0.02, 0.0, -90.0, 0, 0, 1, 1, 0, 1, 0, 1)
+    ESX.PlayAnim('mp_common', 'givetake1_a', 8.0, -1, 0)
+    Wait(1000)
+    DeleteEntity(obj)
+    obj2 = CreateObject(GetHashKey('hei_prop_heist_cash_pile'), 0, 0, 0, true)
+    AttachEntityToEntity(obj2, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 57005), 0.13, 0.02, 0.0, -90.0, 0, 0, 1, 1, 0, 1, 0, 1)
+    Wait(1000)
+    DeleteEntity(obj2)
+
+    for i = 1, #ESX.PlayerData.inventory, 1 do
+        if (ESX.PlayerData.inventory[i].count ~= false) and (ESX.PlayerData.inventory[i].name == "veget_burger") and (ESX.PlayerData.inventory[i].count > 0) then
+            currentBurger = ESX.PlayerData.inventory[i].count
+        end
+    end
+    
+    while RecupDeBurger do
+        Citizen.Wait(2000)
+        if currentBurger == nil then
+            currentBurger = 0
+            endmission()
+        end
+        if currentBurger > burgerLivraison then
+            RecupDeBurger = false
+            ESX.ShowNotification("~g~Vous avez terminé votre livraison")
+            resetmission()
+        else
+            burgerLivraison = currentBurger
+            endmission()
+        end
+        Citizen.Wait(0)
+    end
+    TriggerServerEvent("RetirerBurgerInventaire", burgerLivraison, Config.itemDb_name, Config.itemPrix, Config.itemName) 
+    livraisonEnCours = false
+end)
+
+function resetmission()
+    RemoveBlip(BLIP_1)
+    BLIP_1 = nil
+    onJob = true
+    randomDelivery()
+end
+
+function endmission()
+    RemoveBlip(BLIP_1)
+    BLIP_1 = nil
+    onJob = false
+    RecupDeBurger = false
+    ESX.ShowNotification('Fin de la tournée de livraison.')
+end

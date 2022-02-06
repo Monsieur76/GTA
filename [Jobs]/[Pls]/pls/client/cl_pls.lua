@@ -537,7 +537,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-RMenu.Add('export_ron', 'main', RageUI.CreateMenu("Export RON", "(Taxe Gouvernementale : 20%)"))
+RMenu.Add('export_ron', 'main', RageUI.CreateMenu("Export RON", "Export RON"))
 
 Citizen.CreateThread(function()
     while true do
@@ -556,7 +556,7 @@ Citizen.CreateThread(function()
                         end
                         RageUI.ButtonWithStyle(ESX.PlayerData.inventory[i].label .. ' (' ..
                                                    ESX.PlayerData.inventory[i].count .. ')', nil, {
-                            RightLabel = "~g~ " .. math.ceil(prixItem * taxeEtat) .. " $"
+                            RightLabel = "~g~ " .. math.ceil(prixItem) .. " $"
                         }, true, function(Hovered, Active, Selected)
                             if Selected then
                                 local valid, quantity = CheckQuantity(

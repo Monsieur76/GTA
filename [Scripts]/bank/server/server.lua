@@ -47,7 +47,7 @@ end)
 ESX.RegisterServerCallback('h-banking:getAccounts', function(source, cb)
     local xPlayer = ESX.GetPlayerFromId(source)
     cb({
-        wallet = xPlayer.getMoney(),
+        wallet = xPlayer.getAccount('money').money,
         bank = xPlayer.getAccount('bank').money
     })
 end)

@@ -586,7 +586,7 @@ Citizen.CreateThread(function()
     end
 end)
 
-RMenu.Add('export_vignoble', 'main', RageUI.CreateMenu("Export Vignoble", "(Taxe Gouvernementale : 20%)" ))
+RMenu.Add('export_vignoble', 'main', RageUI.CreateMenu("Export Vignoble", "Export Vignoble" ))
 
 Citizen.CreateThread(function()
     while true do  
@@ -609,7 +609,7 @@ Citizen.CreateThread(function()
                         elseif ESX.PlayerData.inventory[i].name == "grand_cru" then
                             prixItem = prixGrandCru
                         end
-                        RageUI.ButtonWithStyle(ESX.PlayerData.inventory[i].label .. ' (' .. ESX.PlayerData.inventory[i].count .. ')', nil, { RightLabel = "~g~ ".. math.ceil(prixItem*taxeEtat) .." $"}, true, function(Hovered, Active, Selected)
+                        RageUI.ButtonWithStyle(ESX.PlayerData.inventory[i].label .. ' (' .. ESX.PlayerData.inventory[i].count .. ')', nil, { RightLabel = "~g~ ".. math.ceil(prixItem) .." $"}, true, function(Hovered, Active, Selected)
                             if Selected then
                                 local valid, quantity = CheckQuantity(KeyboardInput("Quantité", "", 10,"VIGNE_INPUT_MONTANT"))
                                 if not valid then

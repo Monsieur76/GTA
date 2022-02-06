@@ -55,7 +55,6 @@ AddEventHandler('esx_billing:sendBill', function(playerId, label, amount, isFine
                     '~b~' .. notif .. ' de ' .. amount .. "$",
                     'Appuyez sur ~g~Y ~s~pour payer ou sur ~r~N ~s~pour refuser', icon, 9)
                 TriggerClientEvent("payment_facture", xTarget.source, _source, playerId, label, amount, isFine)
-
             end
         end
 
@@ -71,11 +70,11 @@ RegisterServerEvent('Accept_payement')
 AddEventHandler('Accept_payement', function(id_first_player, playerId, accountName, amount, isFine)
     local xPlayer = ESX.GetPlayerFromId(id_first_player)
     local xTarget = ESX.GetPlayerFromId(playerId)
+    print(isFine)
     if isFine then
         if xTarget.getAccount("bank").money >= amount then
 			TriggerEvent('society:getObject', accountName, function(weightSociety,store, money, inventory)
                 store.addMoney(amount)
-
                 xTarget.removeAccountMoney("bank", amount)
 
                 TriggerClientEvent('esx:showNotification', xTarget.source, "L'amende a été payée")
@@ -88,23 +87,24 @@ AddEventHandler('Accept_payement', function(id_first_player, playerId, accountNa
                 "La personne n'a pas l'argent sur son compte en banque")
         end
     end
-    if not isFine then
+    if isFine == nil then
         if xTarget.getAccount("money").money + xTarget.getAccount("black_money").money >= amount then
             TriggerEvent('society:getObject', accountName, function(weightSociety,store, money, inventory)
                 store.addMoney(amount)
-
-                if xTarget.getAccount("black_money").money then
-                    amount2 = amount - xTarget.getAccount("black_money").money
-                    amount3 = amount - amount2
-                    xTarget.removeAccountMoney("money",amount3)
-                    xTarget.removeAccountMoney("black_money", amount2)
+                
+                local black = xTarget.getAccount("black_money").money
+                if black >= amount then
+                    xTarget.removeAccountMoney("black_money", amount)
+                elseif black ~= 0 and black < amount then
+                    totalrestepayer = amount - black
+                    xTarget.removeAccountMoney('black_money', black)
+                    xTarget.removeAccountMoney('money', totalrestepayer)
                 else
-                    xTarget.removeAccountMoney("money", amount)
+                    xTarget.removeAccountMoney('money', amount)
                 end
 
                 TriggerClientEvent('esx:showNotification', xTarget.source, "La facture a été payée")
                 TriggerClientEvent('esx:showNotification', xPlayer.source, "La facture a été payée")
-
             end)
 
         else

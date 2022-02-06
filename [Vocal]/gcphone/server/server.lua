@@ -1,5 +1,5 @@
 ESX = nil
-local DataStoreMessage ={}
+--local DataStoreMessage ={}
 TriggerEvent('esx:getSharedObject', function(obj)
     ESX = obj
 end)
@@ -7,77 +7,77 @@ end)
 math.randomseed(os.time())
 
 
-MySQL.ready(function()
-    MySQL.Async.fetchAll('SELECT * FROM phone_messages', {}, function(historiqueMessage)
+--MySQL.ready(function()
+  --  MySQL.Async.fetchAll('SELECT * FROM phone_messages', {}, function(historiqueMessage)
 
-        for i = 1, #historiqueMessage, 1 do
-            local id = nil
-            local transmitter = nil
-            local receiver = nil
-            local message = nil
-            local time = nil
-            local isRead = nil
-            local owner = nil
-            local isTaken = nil
-            local takenBy = nil
-            local fromNpc = nil
-            local groupGUID = nil
-            local fromNorth = nil
+      --  for i = 1, #historiqueMessage, 1 do
+         --   local id = nil
+         --   local transmitter = nil
+           -- local receiver = nil
+         --   local message = nil
+          --  local time = nil
+          --  local isRead = nil
+          --  local owner = nil
+          --  local isTaken = nil
+          --  local takenBy = nil
+          ---  local fromNpc = nil
+          --  local groupGUID = nil
+          --  local fromNorth = nil
 
-            if historiqueMessage[i].id ~= nil then
-                id = historiqueMessage[i].id
-            end
+          --  if historiqueMessage[i].id ~= nil then
+          --      id = historiqueMessage[i].id
+           -- end
 
-            if historiqueMessage[i].transmitter ~= nil then
-                transmitter = historiqueMessage[i].transmitter
-            end
+          --  if historiqueMessage[i].transmitter ~= nil then
+          --      transmitter = historiqueMessage[i].transmitter
+          --  end
 
-            if historiqueMessage[i].receiver ~= nil then
-                receiver = historiqueMessage[i].receiver
-            end
+          --  if historiqueMessage[i].receiver ~= nil then
+          --      receiver = historiqueMessage[i].receiver
+          ---  end
 
-            if historiqueMessage[i].message ~= nil then
-                message = historiqueMessage[i].message
-            end
+          --  if historiqueMessage[i].message ~= nil then
+         --       message = historiqueMessage[i].message
+          --  end
 
-            if historiqueMessage[i].time ~= nil then
-                time = historiqueMessage[i].time
-            end
+          --  if historiqueMessage[i].time ~= nil then
+          --      time = historiqueMessage[i].time
+         --   end
 
-            if historiqueMessage[i].isRead ~= nil then
-                isRead = historiqueMessage[i].isRead
-            end
+           -- if historiqueMessage[i].isRead ~= nil then
+         --       isRead = historiqueMessage[i].isRead
+         --   end
 
-            if historiqueMessage[i].owner ~= nil then
-                owner = historiqueMessage[i].owner
-            end
+         --   if historiqueMessage[i].owner ~= nil then
+          --      owner = historiqueMessage[i].owner
+         --   end
 
-            if historiqueMessage[i].isTaken ~= nil then
-                isTaken = historiqueMessage[i].isTaken
-            end
+          --  if historiqueMessage[i].isTaken ~= nil then
+         --       isTaken = historiqueMessage[i].isTaken
+         --   end
 
-            if historiqueMessage[i].takenBy ~= nil then
-                takenBy = historiqueMessage[i].takenBy
-            end
+         --   if historiqueMessage[i].takenBy ~= nil then
+         --       takenBy = historiqueMessage[i].takenBy
+         --   end
 
-            if historiqueMessage[i].fromNpc ~= nil then
-                fromNpc = historiqueMessage[i].fromNpc
-            end
+        --    if historiqueMessage[i].fromNpc ~= nil then
+         --       fromNpc = historiqueMessage[i].fromNpc
+        --    end
 
-            if historiqueMessage[i].groupGUID ~= nil then
-                groupGUID = historiqueMessage[i].groupGUID
-            end
+        --    if historiqueMessage[i].groupGUID ~= nil then
+        --        groupGUID = historiqueMessage[i].groupGUID
+        --    end
 
-            if historiqueMessage[i].fromNorth ~= nil then
-                fromNorth = historiqueMessage[i].fromNorth
-            end
+       --     if historiqueMessage[i].fromNorth ~= nil then
+       --         fromNorth = historiqueMessage[i].fromNorth
+       --     end
 
-            Citizen.Wait(10)
-            DataStoreMessage[id]=CreateDataStore(transmitter, receiver, message, time, isRead, owner, isTaken, takenBy, fromNpc, groupGUID,fromNorth)
-        end
-        print('historique ready')
-    end)
-end)
+      --      Citizen.Wait(10)
+      --      DataStoreMessage[id]=CreateDataStore(transmitter, receiver, message, time, isRead, owner, isTaken, takenBy, fromNpc, groupGUID,fromNorth)
+     --   end
+   --     print('historique ready')
+  --  end)
+--end)
 
 
 --- For phone number style XXX-XXXX
@@ -293,15 +293,15 @@ end)
 -- ====================================================================================
 function getMessages(identifier)
     local xPlayer = ESX.GetPlayerFromIdentifier(identifier)
-    --local result = MySQL.Sync.fetchAll(
-    --    "SELECT phone_messages.* FROM phone_messages LEFT JOIN users ON users.identifier = @identifier WHERE phone_messages.receiver = users.phone_number",
-    --    {
-    --        ['@identifier'] = identifier
-    --    })
+    local result = MySQL.Sync.fetchAll(
+        "SELECT phone_messages.* FROM phone_messages LEFT JOIN users ON users.identifier = @identifier WHERE phone_messages.receiver = users.phone_number",
+        {
+            ['@identifier'] = identifier
+        })
     local finalResult = {}
-    for _, v in pairs(DataStoreMessage) do
-        --if v.transmitter:match('[5-7][5-7][5-7]%-[0-9][0-9][0-9][0-9]') or v.transmitter == xPlayer.job.name then
-        if v.receiver == xPlayer.getphone() or v.transmitter == xPlayer.job.name then
+    for _, v in pairs(result) do
+        if v.transmitter:match('[5-7][5-7][5-7]%-[0-9][0-9][0-9][0-9]') or v.transmitter == xPlayer.job.name then
+        --if v.receiver == xPlayer.getphone() or v.transmitter == xPlayer.job.name then
             table.insert(finalResult, v)
         end
     end
@@ -329,7 +329,7 @@ function _internalAddMessage(transmitter, receiver, message, owner, fromNpc, gro
         ['@fromNorth'] = fromNorth
     }
     local id = MySQL.Sync.insert(Query, Parameters)
-    DataStoreMessage[id]=CreateDataStore(transmitter, receiver, message, 0, owner, owner, 0, nil, fromNpc, groupGUID,fromNorth)
+    --DataStoreMessage[id]=CreateDataStore(transmitter, receiver, message, 0, owner, owner, 0, nil, fromNpc, groupGUID,fromNorth)
     return MySQL.Sync.fetchAll(Query2, {
         ['@id'] = id
     })[1]

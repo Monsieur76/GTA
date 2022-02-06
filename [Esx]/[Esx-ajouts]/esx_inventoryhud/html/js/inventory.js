@@ -68,7 +68,7 @@ window.addEventListener("message", function (event) {
 });
 
 function closeInventory() {
-    $.post("https://esx_inventoryhud/NUIFocusOff", JSON.stringify({ type: type, inventoryName: inventoryName }));
+    $.post("https://esx_inventoryhud/NUIFocusOff", JSON.stringify({ type: type, inventoryName: inventoryName }));  
 }
 
 function inventorySetup(items) {

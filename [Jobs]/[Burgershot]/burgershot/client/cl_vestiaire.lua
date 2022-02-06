@@ -22,7 +22,7 @@ end)
 
 ---------------- FONCTIONS ------------------
 
-RMenu.Add('tenueBurger', 'burger', RageUI.CreateMenu("Vestaire", "~b~Vestiaire"))
+RMenu.Add('tenueBurger', 'burger', RageUI.CreateMenu("Vestiaire", "~b~Vestiaire"))
 
 Citizen.CreateThread(function()
     while true do
@@ -174,20 +174,15 @@ Citizen.CreateThread(function()
 
 ---------------------------------------------
 
-
-local position = {
-    {x = -1183.34, y = -898.02, z = 12.98}
-}
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
 
             if ESX.PlayerData.job and ESX.PlayerData.job.name == 'burgershot' then 
-                DrawMarker(1,position[1].x, position[1].y, position[1].z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 25, 95, 255, 255, false, 95, 255, 0, nil, nil, 0)
+                DrawMarker(1,Config.posBurger.Vestiaire.x, Config.posBurger.Vestiaire.y, Config.posBurger.Vestiaire.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.25, 25, 95, 255, 255, false, 95, 255, 0, nil, nil, 0)
 
             local plyCoords = GetEntityCoords(PlayerPedId(), false)
-            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, position[1].x, position[1].y, position[1].z)
+            local dist = Vdist(plyCoords.x, plyCoords.y, plyCoords.z, Config.posBurger.Vestiaire.x, Config.posBurger.Vestiaire.y, Config.posBurger.Vestiaire.z)
         
             if dist <= 2.0 then
                 ESX.ShowHelpNotification("~INPUT_CONTEXT~ Vestiaires")

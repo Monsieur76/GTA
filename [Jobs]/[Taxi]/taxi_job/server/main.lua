@@ -21,14 +21,14 @@ AddEventHandler('esx_taxijob:success', function()
 
 			math.randomseed(os.time())
 			local total = math.random(Config.NPCJobEarnings.min, Config.NPCJobEarnings.max)
-			mairie = total * 0.2
-			moneys = total - mairie
+			-- mairie = total * 0.2
+			moneys = total
 			TriggerEvent('society:getObject', "taxi", function(weightSociety,store, money, inventory)
 				store.addMoney(moneys)
 			end)
-			TriggerEvent('society:getObject', "mairie", function(weightSociety,store, money, inventory)
-				store.addMoney(mairie)
-			end)
+			-- TriggerEvent('society:getObject', "mairie", function(weightSociety,store, money, inventory)
+			-- 	store.addMoney(mairie)
+			-- end)
 		end
 	else
 		print(('[esx_taxijob] [^3WARNING^7] %s attempted to trigger success (cheating)'):format(xPlayer.identifier))
